@@ -8,15 +8,8 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li>
-      <a href="#abstract">Abstract</a>
-      <ul>
-        <li><a href="#getting-started">Getting Started</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#usage">Usage</a>
-    </li>
+    <li><a href="#abstract">Abstract</a></li>
+    <li><a href="#usage">Usage</a></li>
     <li><a href="results">Results</a></li>
       <ul>
         <li><a href="#datasets">Investigating Dataset Distribution for the Robustness and Generalisability of a Model</a></li>
