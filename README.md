@@ -2,13 +2,13 @@
 
 # Enhancing Deep Learning-Based Airway Segmentation 🫁: Investigating Loss Functions and Medical Foundation Models 
 ## MEng Bioengineering Individual Project 2023-2024 @ Imperial College London
-## 🖋️ Jey Tse Loh
+## 🖋️ Jey Tse Loh (MEng Biomedical Engineering)
 
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#abstract">Abstract</a></li>
+    <li><a href="#abstract">Project Overview</a></li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="results">Results</a></li>
       <ul>
@@ -22,7 +22,7 @@
 </details>
 
 <a name="abstract"></a>
-## ℹ️ Abstract
+## ℹ️ Project Overview
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
