@@ -51,7 +51,7 @@ Therefore, the objectives of the project are summarised as follows:
 <a name="datasets"></a>
 ### 💡 Investigating Dataset Distribution for the Robustness and Generalisability of a Model
 | **Dataset**       | **Number of Cases** |
-|-------------------|---------------------|
+|:---|:---:|
 | ATM'22            |         239         |
 | AeroPath          |          21         |
 | ATM'22 + AeroPath |         260         |
@@ -60,8 +60,13 @@ Therefore, the objectives of the project are summarised as follows:
 
 <a name="comparison-study"></a>
 ### 💡 Comparison Study of Loss Functions in Airway Segmentation
+
+<div align="left">
+  <img src="assets/comparison-pipeline-highres.png">
+</div>
+
 |              **Loss**              | **Link**                                                                                                                                                                                                                                                                                                                                                                 |
-|:----------------------------------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|:----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Combo                         | [Combo loss: Handling input and output imbalance in multi-organ segmentation]( https://www.sciencedirect.com/science/article/pii/S0895611118305688?casa_token=4Q_znPQXFOgAAAAA:TReCw4sSZPNo-JUaMX1-eY__K7CnIZyBguDEklHBPnvUEuWDr-U9uclwJRZd5HukFX7RnU6f) <br> [Code](https://github.com/MIC-DKFZ/nnUNet/blob/master/nnunetv2)                                                  |
 | General Union (GUL)                | [Alleviating Class-Wise Gradient Imbalance for Pulmonary Airway Segmentation](https://ieeexplore.ieee.org/abstract/document/9427208?casa_token=yoN6BvlPSAYAAAAA:vh08xX4dJ4YSconamkm5eC5YciU7J4uYIQAxNrd44RXua2vx6HhSDj4Y5w-dByiPTtlBqxg&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;signout=success) <br> [Code](https://github.com/haozheng-sjtu/3d-airway-segmentation) |
 | Connectivity-Aware Surrogate (CAS) | [Towards Connectivity-Aware Pulmonary Airway Segmentation](https://ieeexplore.ieee.org/document/10283811) <br> [Code](https://github.com/Puzzled-Hui/Connectivity-Aware-Airway-Segmentation)                                                                                                                                                                                  |
@@ -73,6 +78,11 @@ Therefore, the objectives of the project are summarised as follows:
 
 <a name="benchmarking"></a>
 ### 💡 Benchmarking Medical SAMs on Airway Segmentation
+
+<div align="left">
+  <img src="assets/benchmark-pipeline-highres.png">
+</div>
+
 | **Model** | **Link** |
 |-----------|----------|
 | MedSAM    | [Segment anything in medical images](https://www.nature.com/articles/s41467-024-44824-z) <br> [Code](https://github.com/bowang-lab/MedSAM)         |
