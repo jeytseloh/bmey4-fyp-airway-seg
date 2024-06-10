@@ -50,18 +50,26 @@ Therefore, the objectives of the project are summarised as follows:
 ## 🏆 Key Results
 <a name="datasets"></a>
 ### 💡 Investigating Dataset Distribution for the Robustness and Generalisability of a Model
+| **Dataset**       | **Number of Cases** |
+|-------------------|---------------------|
+| ATM'22            |         239         |
+| AeroPath          |          21         |
+| ATM'22 + AeroPath |         260         |
 
+**A large dataset with a good representation of true (healthy) airway structures is key for model robustness and generalisability.**
 
 <a name="comparison-study"></a>
 ### 💡 Comparison Study of Loss Functions in Airway Segmentation
 |              **Loss**              | **Link**                                                                                                                                                                                                                                                                                                                                                                 |
 |:----------------------------------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Combo (L1)                         | [Combo loss: Handling input and output imbalance in multi-organ segmentation]( https://www.sciencedirect.com/science/article/pii/S0895611118305688?casa_token=4Q_znPQXFOgAAAAA:TReCw4sSZPNo-JUaMX1-eY__K7CnIZyBguDEklHBPnvUEuWDr-U9uclwJRZd5HukFX7RnU6f) <br> [Code](https://github.com/MIC-DKFZ/nnUNet/blob/master/nnunetv2)                                                  |
+| Combo                         | [Combo loss: Handling input and output imbalance in multi-organ segmentation]( https://www.sciencedirect.com/science/article/pii/S0895611118305688?casa_token=4Q_znPQXFOgAAAAA:TReCw4sSZPNo-JUaMX1-eY__K7CnIZyBguDEklHBPnvUEuWDr-U9uclwJRZd5HukFX7RnU6f) <br> [Code](https://github.com/MIC-DKFZ/nnUNet/blob/master/nnunetv2)                                                  |
 | General Union (GUL)                | [Alleviating Class-Wise Gradient Imbalance for Pulmonary Airway Segmentation](https://ieeexplore.ieee.org/abstract/document/9427208?casa_token=yoN6BvlPSAYAAAAA:vh08xX4dJ4YSconamkm5eC5YciU7J4uYIQAxNrd44RXua2vx6HhSDj4Y5w-dByiPTtlBqxg&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;signout=success) <br> [Code](https://github.com/haozheng-sjtu/3d-airway-segmentation) |
 | Connectivity-Aware Surrogate (CAS) | [Towards Connectivity-Aware Pulmonary Airway Segmentation](https://ieeexplore.ieee.org/document/10283811) <br> [Code](https://github.com/Puzzled-Hui/Connectivity-Aware-Airway-Segmentation)                                                                                                                                                                                  |
 | Hybrid Continuity                  | [Fuzzy Attention Neural Network to Tackle Discontinuity in Airway Segmentation](https://ieeexplore.ieee.org/abstract/document/10129972?casa_token=A6SwmZUGnLIAAAAA:YUd1adKp4yrWHD5hdXpb940u51tB-E63AFJ4XV1qDLbx1pO2VbkA6RTB1k0R_ReCszLBS4Y) <br> [Code](https://github.com/Nandayang/FANN-for-airway-segmentation)                                                            |
 | Penalty Dice                       | [NaviAirway: a Bronchiole-sensitive Deep Learning-based Airway Segmentation Pipeline](https://arxiv.org/abs/2203.04294) <br> [Code](https://github.com/AntonotnaWang/NaviAirway)                                                                                                                                                                                              |
 
+- **Loss functions incorporating topological prior knowledge such as airway centrelines outperform generic overlap-based loss functions (e.g., Dice loss).**
+- **From our experiments, CAS loss performed best, particularly in topology-based metrics (i.e., TD, BD, and CCF).**
 
 <a name="benchmarking"></a>
 ### 💡 Benchmarking Medical SAMs on Airway Segmentation
@@ -69,6 +77,9 @@ Therefore, the objectives of the project are summarised as follows:
 |-----------|----------|
 | MedSAM    | [Segment anything in medical images](https://www.nature.com/articles/s41467-024-44824-z) <br> [Code](https://github.com/bowang-lab/MedSAM)         |
 | SAM-Med3D | [SAM-Med3D](https://arxiv.org/abs/2310.15161) <br> [Code](https://github.com/uni-medical/SAM-Med3D)         |
+
+- **The performance of medical adaptations of SAM is generally inferior to state-of-the-art specialist methods for airway segmentation, but fine-tuning with airway segmentation data can improve the performance of medical SAMs.**
+- **Nonetheless, further advancements are required before practical application is feasible.**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
