@@ -9,8 +9,8 @@
   <summary>Table of Contents</summary>
   <ol>
     <li><a href="#abstract">Project Overview</a></li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="results">Results</a></li>
+    <li><a href="#getting-started">Getting Started</a></li>
+    <li><a href="results">Key Results</a></li>
       <ul>
         <li><a href="#datasets">Investigating Dataset Distribution for the Robustness and Generalisability of a Model</a></li>
         <li><a href="#comparison-study">Comparison Study of Loss Functions in Airway Segmentation</a></li>
@@ -38,11 +38,71 @@ Therefore, the objectives of the project are summarised as follows:
 
 <a name="getting-started"></a>
 ## 🚀 Getting Started
+1. Create a virtual environment and activate it.
+```bash
+conda create -n fyp python=3.10 -y
+```
+2. Install [PyTorch](https://pytorch.org/get-started/locally/) according to their website instructions.
+3. To install nnU-Net:
+```bash
+git clone https://github.com/MIC-DKFZ/nnUNet.git
+cd nnUNet
+pip install -e .
+```
+4. To run the custom trainers on nnU-Net, copy the custom trainers, loss functions, preprocessor, data transforms, and dataloaders to the respective directories within the cloned nnU-Net. Ensure that you **re-install** nnU-Net with the custom files.
+```bash
+# preprocessor
+cp /{path_to}/nnunetv2/preprocessors/cl_preprocessor.py /{path_to}/nnUNet/nnunetv2/preprocessing/preprocessors
+# custom transforms
+cp /{path_to}/nnunetv2/training/data_augmentation/custom_transforms/deep_supervision_downsampling_cl.py /{path_to}/nnUNet/nnunetv2/training/data_augmentation/custom_transforms
+cp /{path_to}/bmey4-fyp/nnunetv2/training/data_augmentation/custom_transforms/mirror_transform_cl.py /{path_to}/nnUNet/nnunetv2/training/data_augmentation/custom_transforms
+cp /{path_to}/nnunetv2/training/data_augmentation/custom_transforms/spatial_transform_cl.py /{path_to}/nnUNet/nnunetv2/training/data_augmentation/custom_transforms
+# data loaders
+cp /{path_to}/nnunetv2/training/dataloading/base_data_loader_cl.py /{path_to}/nnUNet/nnunetv2/training/dataloading
+cp /{path_to}/nnunetv2/training/dataloading/data_loader_3d_cl.py /{path_to}/nnUNet/nnunetv2/training/dataloading
+cp /{path_to}/nnunetv2/training/dataloading/nnunet_dataset_cl.py /{path_to}/nnUNet/nnunetv2/training/dataloading
+# trainer
+cp /{path_to}/nnunetv2/training/nnUNetTrainer/nnUNetTrainer_{loss}.py /{path_to}/nnUNet/nnunetv2/training/nnUNetTrainer
+# loss
+cp /{path_to}/nnunetv2/training/loss/{loss}.py /{path_to}/nnUNet/nnunetv2/training/loss
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<a name="usage"></a>
-## 🔨 Usage
+# install nnunet
+cd /{path_to}/nnUNet
+pip install -e .
+```
+5. Sample scripts to run patch extraction, preprocessing (nnU-Net), training (nnU-Net), inference (nnU-Net), and volume reconstruction are available [here](nnunetv2/scripts/).
+6. Please refer to nnU-Net's documentation for more details on [dataset format](https://github.com/MIC-DKFZ/nnUNet/blob/master/documentation/dataset_format.md) and [environment variables](https://github.com/MIC-DKFZ/nnUNet/blob/master/documentation/set_environment_variables.md).
+7. For the [patch extraction](utils/extract_patches.py) step, the resulting filename convention is as follows:
+```
+    extracted_patches/
+    ├── img
+    │   ├── {case_id}_img_{patch_num}.nii.gz
+    │   ├── Aero_001_img_0.nii.gz
+    │   ├── Aero_001_img_1.nii.gz
+    │   ├── ...
+    └── label
+        ├── {case_id}_label_{patch_num}.nii.gz
+        ├── Aero_001_label_0.nii.gz
+        ├── Aero_001_label_1.nii.gz
+        ├── ...
+```
+Note: 
+Please follow this [script](utils/file_rename.py) to convert the filenames to match the nnU-Net convention for training/inference on patches:
+```
+    nnUNet_raw/DatasetXXX_extractedPatches/
+    ├── dataset.json
+    ├── imagesTr
+    │   ├── {case_id}_{patch_num}_0000.nii.gz
+    │   ├── Aero_001_0_0000.nii.gz
+    │   ├── Aero_001_1_0000.nii.gz
+    │   ├── ...
+    └── labelsTr
+        ├── {case_id}_{patch_num}.nii.gz
+        ├── Aero_001_0.nii.gz
+        ├── Aero_001_1.nii.gz
+        ├── ...
+```
+8. To perform inference and fine-tuning on MedSAM and SAM-Med3D, please follow the instructions listed in the [LiteMedSAM branch](https://github.com/bowang-lab/MedSAM/tree/LiteMedSAM) (for 3D images) and [SAM-Med3D main](https://github.com/uni-medical/SAM-Med3D/tree/main).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -67,11 +127,11 @@ Therefore, the objectives of the project are summarised as follows:
 
 |              **Loss**              | **Link**                                                                                                                                                                                                                                                                                                                                                                 |
 |:----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Combo, **L1**                         | [Combo loss: Handling input and output imbalance in multi-organ segmentation]( https://www.sciencedirect.com/science/article/pii/S0895611118305688?casa_token=4Q_znPQXFOgAAAAA:TReCw4sSZPNo-JUaMX1-eY__K7CnIZyBguDEklHBPnvUEuWDr-U9uclwJRZd5HukFX7RnU6f) <br> [Code](https://github.com/MIC-DKFZ/nnUNet/blob/master/nnunetv2)                                                  |
-| General Union (GUL), **L2**                | [Alleviating Class-Wise Gradient Imbalance for Pulmonary Airway Segmentation](https://ieeexplore.ieee.org/abstract/document/9427208?casa_token=yoN6BvlPSAYAAAAA:vh08xX4dJ4YSconamkm5eC5YciU7J4uYIQAxNrd44RXua2vx6HhSDj4Y5w-dByiPTtlBqxg&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;signout=success) <br> [Code](https://github.com/haozheng-sjtu/3d-airway-segmentation) |
-| Connectivity-Aware Surrogate (CAS), **L3** | [Towards Connectivity-Aware Pulmonary Airway Segmentation](https://ieeexplore.ieee.org/document/10283811) <br> [Code](https://github.com/Puzzled-Hui/Connectivity-Aware-Airway-Segmentation)                                                                                                                                                                                  |
-| Hybrid Continuity, **L4**                  | [Fuzzy Attention Neural Network to Tackle Discontinuity in Airway Segmentation](https://ieeexplore.ieee.org/abstract/document/10129972?casa_token=A6SwmZUGnLIAAAAA:YUd1adKp4yrWHD5hdXpb940u51tB-E63AFJ4XV1qDLbx1pO2VbkA6RTB1k0R_ReCszLBS4Y) <br> [Code](https://github.com/Nandayang/FANN-for-airway-segmentation)                                                            |
-| Penalty Dice, **L5**                       | [NaviAirway: a Bronchiole-sensitive Deep Learning-based Airway Segmentation Pipeline](https://arxiv.org/abs/2203.04294) <br> [Code](https://github.com/AntonotnaWang/NaviAirway)                                                                                                                                                                                              |
+| Combo, **L1**                         | [Combo loss: Handling input and output imbalance in multi-organ segmentation]( https://www.sciencedirect.com/science/article/pii/S0895611118305688?casa_token=4Q_znPQXFOgAAAAA:TReCw4sSZPNo-JUaMX1-eY__K7CnIZyBguDEklHBPnvUEuWDr-U9uclwJRZd5HukFX7RnU6f) <br> [Original Code Release](https://github.com/MIC-DKFZ/nnUNet/blob/master/nnunetv2)                                                  |
+| General Union (GUL), **L2**                | [Alleviating Class-Wise Gradient Imbalance for Pulmonary Airway Segmentation](https://ieeexplore.ieee.org/abstract/document/9427208?casa_token=yoN6BvlPSAYAAAAA:vh08xX4dJ4YSconamkm5eC5YciU7J4uYIQAxNrd44RXua2vx6HhSDj4Y5w-dByiPTtlBqxg&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;signout=success) <br> [Original Code Release](https://github.com/haozheng-sjtu/3d-airway-segmentation) |
+| Connectivity-Aware Surrogate (CAS), **L3** | [Towards Connectivity-Aware Pulmonary Airway Segmentation](https://ieeexplore.ieee.org/document/10283811) <br> [Original Code Release](https://github.com/Puzzled-Hui/Connectivity-Aware-Airway-Segmentation)                                                                                                                                                                                  |
+| Hybrid Continuity, **L4**                  | [Fuzzy Attention Neural Network to Tackle Discontinuity in Airway Segmentation](https://ieeexplore.ieee.org/abstract/document/10129972?casa_token=A6SwmZUGnLIAAAAA:YUd1adKp4yrWHD5hdXpb940u51tB-E63AFJ4XV1qDLbx1pO2VbkA6RTB1k0R_ReCszLBS4Y) <br> [Original Code Release](https://github.com/Nandayang/FANN-for-airway-segmentation)                                                            |
+| Penalty Dice, **L5**                       | [NaviAirway: a Bronchiole-sensitive Deep Learning-based Airway Segmentation Pipeline](https://arxiv.org/abs/2203.04294) <br> [Original Code Release](https://github.com/AntonotnaWang/NaviAirway)                                                                                                                                                                                              |
 
 - **Loss functions incorporating topological prior knowledge such as airway centrelines outperform generic overlap-based loss functions (e.g., Dice loss).**
 - **From our experiments, CAS loss performed best, particularly in topology-based metrics (i.e., TD, BD, and CCF).**
@@ -85,8 +145,8 @@ Therefore, the objectives of the project are summarised as follows:
 
 | **Model** | **Link** |
 |-----------|----------|
-| MedSAM    | [Segment anything in medical images](https://www.nature.com/articles/s41467-024-44824-z) <br> [Code](https://github.com/bowang-lab/MedSAM)         |
-| SAM-Med3D | [SAM-Med3D](https://arxiv.org/abs/2310.15161) <br> [Code](https://github.com/uni-medical/SAM-Med3D)         |
+| MedSAM    | [Segment anything in medical images](https://www.nature.com/articles/s41467-024-44824-z) <br> [Original Repository](https://github.com/bowang-lab/MedSAM)         |
+| SAM-Med3D | [SAM-Med3D](https://arxiv.org/abs/2310.15161) <br> [Original Repository](https://github.com/uni-medical/SAM-Med3D)         |
 
 - **The performance of medical adaptations of SAM is generally inferior to state-of-the-art specialist methods for airway segmentation, but fine-tuning with airway segmentation data can improve the performance of medical SAMs.**
 - **Nonetheless, further advancements are required before practical application is feasible.**
