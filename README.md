@@ -10,11 +10,11 @@
   <ol>
     <li><a href="#abstract">Project Overview</a></li>
     <li><a href="#getting-started">Getting Started</a></li>
-    <li><a href="results">Key Results</a></li>
+    <li><a href="key-results">Key Results</a></li>
       <ul>
-        <li><a href="#datasets">Investigating Dataset Distribution for the Robustness and Generalisability of a Model</a></li>
+        <li><a href="#investigate-datasets">Investigating Dataset Distribution for the Robustness and Generalisability of a Model</a></li>
         <li><a href="#comparison-study">Comparison Study of Loss Functions in Airway Segmentation</a></li>
-        <li><a href="#benchmarking">Benchmarking Medical SAMs on Airway Segmentation</a></li>
+        <li><a href="#benchmarking-sam">Benchmarking Medical SAMs on Airway Segmentation</a></li>
       </ul>
     </li>
     <li><a href="#acknowledgements">Acknowledgments</a></li>
@@ -106,9 +106,10 @@ Please follow this [script](utils/file_rename.py) to convert the filenames to ma
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<a name="results"></a>
+<a name="key-results"></a>
 ## 🏆 Key Results
-<a name="datasets"></a>
+
+<a name="investigate-datasets"></a>
 ### 💡 Investigating Dataset Distribution for the Robustness and Generalisability of a Model
 | **Dataset**       | **Number of Cases** |
 |:---|:---:|
@@ -136,7 +137,7 @@ Please follow this [script](utils/file_rename.py) to convert the filenames to ma
 - **Loss functions incorporating topological prior knowledge such as airway centrelines outperform generic overlap-based loss functions (e.g., Dice loss).**
 - **From our experiments, CAS loss performed best, particularly in topology-based metrics (i.e., TD, BD, and CCF).**
 
-<a name="benchmarking"></a>
+<a name="benchmarking-sam"></a>
 ### 💡 Benchmarking Medical SAMs on Airway Segmentation
 
 <div align="left">
