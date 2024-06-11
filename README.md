@@ -10,14 +10,14 @@
   <ol>
     <li><a href="#abstract">Project Overview</a></li>
     <li><a href="#getting-started">Getting Started</a></li>
-    <li><a href="key-results">Key Results</a></li>
+    <li><a href="#key-results">Key Results</a></li>
       <ul>
         <li><a href="#investigate-datasets">Investigating Dataset Distribution for the Robustness and Generalisability of a Model</a></li>
         <li><a href="#comparison-study">Comparison Study of Loss Functions in Airway Segmentation</a></li>
         <li><a href="#benchmarking-sam">Benchmarking Medical SAMs on Airway Segmentation</a></li>
       </ul>
     </li>
-    <li><a href="#acknowledgements">Acknowledgments</a></li>
+    <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
 
@@ -108,6 +108,7 @@ Please follow this [script](utils/file_rename.py) to convert the filenames to ma
 
 <a name="key-results"></a>
 ## 🏆 Key Results
+An overview of the methods and key findings are presented here.
 
 <a name="investigate-datasets"></a>
 ### 💡 Investigating Dataset Distribution for the Robustness and Generalisability of a Model
